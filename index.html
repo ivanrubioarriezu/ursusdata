@@ -1,580 +1,92 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" href="assets/icons/UrsusDataIcon.ico" />
-  <title>UrsusData | Tecnología & Diseño</title>
-  <meta name="description" content="UrsusData crea experiencias digitales modernas, rápidas y escalables." />
-  <style>
-    :root {
-      --bg: #07111f;
-      --surface: rgba(255,255,255,0.08);
-      --surface-strong: rgba(255,255,255,0.14);
-      --text: #f5f7fb;
-      --muted: #9aa8bf;
-      --accent: #5ee7df;
-      --accent-2: #7b7cff;
-      --border: rgba(255,255,255,0.14);
-      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-    }
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UrsusData | Dark Neon Studio</title>
+    <meta name="description" content="UrsusData builds bold digital products with neon-forward design and modern engineering." />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <canvas id="particles"></canvas>
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="index.html"><span class="brand-mark">U</span> UrsusData</a>
+        <nav class="nav-links">
+          <a class="active" href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </header>
 
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(94, 231, 223, 0.22), transparent 30%),
-        radial-gradient(circle at bottom right, rgba(123, 124, 255, 0.18), transparent 35%),
-        var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    .bg-grid {
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 38px 38px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.65), transparent);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .container {
-      position: relative;
-      z-index: 1;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 24px 20px 80px;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 0 28px;
-    }
-
-    .brand {
-      text-decoration: none;
-      color: var(--text);
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1.05rem;
-    }
-
-    .brand span {
-      display: grid;
-      place-items: center;
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: #04111e;
-      font-weight: 900;
-    }
-
-    nav a {
-      color: var(--muted);
-      text-decoration: none;
-      margin-left: 20px;
-      transition: color 0.3s ease;
-    }
-
-    nav a:hover {
-      color: var(--text);
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 36px;
-      align-items: center;
-      padding: 40px 0 70px;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      padding: 8px 12px;
-      background: rgba(94, 231, 223, 0.12);
-      border: 1px solid rgba(94, 231, 223, 0.24);
-      border-radius: 999px;
-      color: var(--accent);
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-
-    h1 {
-      font-size: clamp(2.2rem, 4vw, 3.9rem);
-      line-height: 1.05;
-      margin-bottom: 16px;
-      font-weight: 800;
-    }
-
-    .hero p {
-      color: var(--muted);
-      font-size: 1.02rem;
-      line-height: 1.8;
-      max-width: 640px;
-    }
-
-    .actions {
-      margin-top: 24px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 18px;
-      border-radius: 999px;
-      text-decoration: none;
-      font-weight: 700;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: #061018;
-      box-shadow: 0 10px 30px rgba(94, 231, 223, 0.18);
-    }
-
-    .btn-secondary {
-      color: var(--text);
-      background: var(--surface);
-      border: 1px solid var(--border);
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 28px;
-    }
-
-    .stat-card {
-      padding: 16px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      backdrop-filter: blur(12px);
-    }
-
-    .stat-card strong {
-      display: block;
-      font-size: 1.1rem;
-      margin-bottom: 6px;
-    }
-
-    .stat-card span {
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .panel {
-      background: linear-gradient(145deg, rgba(255,255,255,0.14), rgba(255,255,255,0.08));
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 20px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(16px);
-    }
-
-    .panel-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-    }
-
-    .dots {
-      display: flex;
-      gap: 8px;
-    }
-
-    .dots span {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      display: inline-block;
-      background: rgba(255,255,255,0.28);
-    }
-
-    .panel-content {
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      background: rgba(7, 17, 31, 0.8);
-    }
-
-    .panel-content svg {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    section {
-      margin-top: 34px;
-    }
-
-    .section-title {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 18px;
-    }
-
-    .section-title h2 {
-      font-size: 1.3rem;
-    }
-
-    .section-title a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .card {
-      padding: 20px;
-      border-radius: 18px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      transition: transform 0.25s ease, border-color 0.25s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(94, 231, 223, 0.35);
-    }
-
-    .card h3 {
-      margin: 10px 0 8px;
-      font-size: 1.05rem;
-    }
-
-    .card p {
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 0.95rem;
-    }
-
-    .icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      display: grid;
-      place-items: center;
-      font-weight: 800;
-      background: linear-gradient(135deg, rgba(94,231,223,0.2), rgba(123,124,255,0.2));
-      color: var(--accent);
-    }
-
-    .workflow {
-      display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 20px;
-      align-items: start;
-      margin-top: 50px;
-    }
-
-    .workflow-copy {
-      padding: 24px;
-      border-radius: 20px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-    }
-
-    .workflow-copy h3 {
-      margin-bottom: 10px;
-      font-size: 1.2rem;
-    }
-
-    .workflow-copy p {
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
-    .steps {
-      display: grid;
-      gap: 12px;
-    }
-
-    .step {
-      display: flex;
-      gap: 12px;
-      align-items: start;
-      padding: 16px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-    }
-
-    .step-number {
-      min-width: 34px;
-      height: 34px;
-      border-radius: 10px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: #051018;
-      font-weight: 800;
-    }
-
-    .step strong {
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .step span {
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-
-    .cta {
-      text-align: center;
-      padding: 34px 24px;
-      margin-top: 48px;
-      border-radius: 24px;
-      background: linear-gradient(135deg, rgba(94,231,223,0.14), rgba(123,124,255,0.16));
-      border: 1px solid var(--border);
-    }
-
-    .cta h2 {
-      margin-bottom: 10px;
-      font-size: clamp(1.4rem, 2.5vw, 2rem);
-    }
-
-    .cta p {
-      color: var(--muted);
-      margin-bottom: 18px;
-      line-height: 1.7;
-    }
-
-    .fade-up {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (max-width: 900px) {
-      .hero, .workflow {
-        grid-template-columns: 1fr;
-      }
-      .cards {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 640px) {
-      header {
-        flex-direction: column;
-        gap: 12px;
-      }
-      nav a {
-        margin: 0 10px;
-      }
-      .stats {
-        grid-template-columns: 1fr;
-      }
-      .hero {
-        padding-top: 20px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="bg-grid"></div>
-
-  <div class="container">
-    <header>
-      <a class="brand" href="#"><span>U</span> UrsusData</a>
-      <nav>
-        <a href="#servicios">Servicios</a>
-        <a href="#proceso">Proceso</a>
-        <a href="#contacto">Contacto</a>
-      </nav>
-    </header>
-
-    <section class="hero">
-      <div class="fade-up">
-        <p class="eyebrow">Innovación • Diseño • Desarrollo</p>
-        <h1>Construimos productos digitales con una visión de futuro.</h1>
-        <p>
-          UrsusData combina estrategia, diseño y tecnología para crear experiencias web modernas,
-          rápidas y preparadas para escalar.
-        </p>
-
-        <div class="actions">
-          <a class="btn btn-primary" href="#contacto">Solicitar una demo</a>
-          <a class="btn btn-secondary" href="#servicios">Ver servicios</a>
-        </div>
-
-        <div class="stats">
-          <div class="stat-card">
-            <strong>+20 proyectos</strong>
-            <span>entregados con éxito</span>
+      <section class="hero">
+        <div class="fade-up">
+          <p class="eyebrow">Neon Strategy • Product Design • Web Development</p>
+          <h1>We create digital experiences that feel alive and look unforgettable.</h1>
+          <p class="lead">
+            UrsusData blends bold design, reliable engineering, and clear strategy to launch products that stand out from the first click.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="contact.html">Book a discovery call</a>
+            <a class="btn btn-secondary" href="portfolio.html">Explore our work</a>
           </div>
-          <div class="stat-card">
-            <strong>99.9%</strong>
-            <span>disponibilidad de infraestructura</span>
-          </div>
-          <div class="stat-card">
-            <strong>24/7</strong>
-            <span>soporte y acompañamiento</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="panel fade-up">
-        <div class="panel-top">
-          <strong>Panel de producto</strong>
-          <div class="dots">
-            <span></span><span></span><span></span>
-          </div>
-        </div>
-        <div class="panel-content">
-          <svg viewBox="0 0 640 420" role="img" aria-label="Visualización de producto digital">
-            <rect x="30" y="32" width="580" height="356" rx="24" fill="#081421"></rect>
-            <rect x="56" y="60" width="180" height="112" rx="16" fill="#0f2740"></rect>
-            <rect x="250" y="60" width="334" height="112" rx="16" fill="#12314f"></rect>
-            <rect x="56" y="188" width="528" height="166" rx="16" fill="#10253c"></rect>
-
-            <rect x="84" y="84" width="80" height="14" rx="7" fill="#5ee7df"></rect>
-            <rect x="84" y="108" width="120" height="10" rx="5" fill="#6b7a91"></rect>
-            <rect x="276" y="86" width="140" height="12" rx="6" fill="#7b7cff"></rect>
-            <rect x="276" y="112" width="220" height="10" rx="5" fill="#71809b"></rect>
-
-            <circle cx="166" cy="260" r="54" fill="url(#g1)"></circle>
-            <rect x="250" y="224" width="180" height="18" rx="9" fill="#5ee7df"></rect>
-            <rect x="250" y="254" width="240" height="12" rx="6" fill="#71809b"></rect>
-            <rect x="250" y="280" width="200" height="12" rx="6" fill="#71809b"></rect>
-
-            <defs>
-              <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#5ee7df"></stop>
-                <stop offset="100%" stop-color="#7b7cff"></stop>
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-      </div>
-    </section>
-
-    <section id="servicios">
-      <div class="section-title fade-up">
-        <h2>Servicios clave</h2>
-        <a href="#contacto">Hablemos</a>
-      </div>
-
-      <div class="cards">
-        <article class="card fade-up">
-          <div class="icon">01</div>
-          <h3>Arquitectura escalable</h3>
-          <p>Diseñamos sistemas sólidos, rápidos y preparados para crecer con tu negocio.</p>
-        </article>
-
-        <article class="card fade-up">
-          <div class="icon">02</div>
-          <h3>Diseño de producto</h3>
-          <p>Interfaces claras, modernas y enfocadas en convertir usuarios en clientes.</p>
-        </article>
-
-        <article class="card fade-up">
-          <div class="icon">03</div>
-          <h3>Desarrollo web</h3>
-          <p>Construimos sitios y aplicaciones con rendimiento, seguridad y estética premium.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="proceso" class="workflow">
-      <div class="workflow-copy fade-up">
-        <h3>Un proceso claro para resultados reales</h3>
-        <p>
-          Trabajamos de forma cercana y estratégica para convertir ideas en productos útiles,
-          atractivos y listos para el mercado.
-        </p>
-      </div>
-
-      <div class="steps">
-        <div class="step fade-up">
-          <div class="step-number">1</div>
-          <div>
-            <strong>Descubrimiento</strong>
-            <span>Entendemos tus metas, usuarios y objetivos para definir una propuesta sólida.</span>
+          <div class="metrics">
+            <div class="metric">
+              <strong>20+ launches</strong>
+              <p>Crafted for fast-growing brands and modern teams.</p>
+            </div>
+            <div class="metric">
+              <strong>24/7 delivery</strong>
+              <p>Always available for support, iteration, and growth.</p>
+            </div>
+            <div class="metric">
+              <strong>100% focus</strong>
+              <p>We design with clarity, performance, and long-term value.</p>
+            </div>
           </div>
         </div>
 
-        <div class="step fade-up">
-          <div class="step-number">2</div>
-          <div>
-            <strong>Diseño</strong>
-            <span>Transformamos la estrategia en una experiencia visual clara y coherente.</span>
+        <div class="panel fade-up">
+          <div class="panel-window">
+            <img src="assets/images/UrsusData.png" alt="Neon digital product preview" />
           </div>
         </div>
+      </section>
 
-        <div class="step fade-up">
-          <div class="step-number">3</div>
-          <div>
-            <strong>Desarrollo</strong>
-            <span>Implementamos de forma robusta con foco en rendimiento, SEO y escalabilidad.</span>
-          </div>
+      <section class="section">
+        <div class="section-heading fade-up">
+          <h2>What we do best</h2>
+          <a href="services.html">See all services</a>
         </div>
-      </div>
-    </section>
+        <div class="cards">
+          <article class="card fade-up">
+            <div class="icon">01</div>
+            <h3>Vision-led product design</h3>
+            <p>We shape immersive brand experiences with speed, clarity, and a polished visual voice.</p>
+          </article>
+          <article class="card fade-up">
+            <div class="icon">02</div>
+            <h3>High-performance websites</h3>
+            <p>Every build is optimized for SEO, accessibility, and engagement from day one.</p>
+          </article>
+          <article class="card fade-up">
+            <div class="icon">03</div>
+            <h3>Scalable digital systems</h3>
+            <p>We create architecture that supports growth without sacrificing usability or trust.</p>
+          </article>
+        </div>
+      </section>
 
-    <section id="contacto" class="cta fade-up">
-      <h2>¿Listo para llevar tu idea al siguiente nivel?</h2>
-      <p>Podemos ayudarte a crear una presencia digital fuerte, moderna y preparada para crecer.</p>
-      <a class="btn btn-primary" href="mailto:contacto@ursusdata.com">Escríbenos</a>
-    </section>
-  </div>
+      <section class="cta fade-up">
+        <h2>Ready to turn your idea into a standout experience?</h2>
+        <p>Let’s create something elegant, fast, and built for momentum.</p>
+        <a class="btn btn-primary" href="contact.html">Start the conversation</a>
+      </section>
+    </div>
 
-  <script>
-    const elements = document.querySelectorAll(".fade-up");
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        }
-      });
-    }, { threshold: 0.15 });
-
-    elements.forEach(el => observer.observe(el));
-  </script>
-</body>
+    <script src="js/script.js"></script>
+  </body>
 </html>
