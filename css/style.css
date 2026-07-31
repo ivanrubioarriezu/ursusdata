@@ -388,6 +388,14 @@ textarea {
   margin-bottom: 10px;
 }
 
+.cta p {
+  margin-bottom: 24px;
+}
+
+.cta .btn {
+  display: inline-block;
+}
+
 .fade-up {
   opacity: 0;
   transform: translateY(22px);
@@ -398,6 +406,7 @@ textarea {
   opacity: 1;
   transform: translateY(0);
 }
+
 
 @media (max-width: 900px) {
   .hero, .split, .contact-grid {
