@@ -415,9 +415,3 @@ textarea {
   .actions { flex-direction: column; align-items: stretch; }
   .btn { width: 100%; }
 }
-
-.brand-logo {
-    width: 32px;
-    height: 32px;
-    object-fit: contain;
-}
