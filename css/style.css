@@ -87,6 +87,13 @@ canvas#particles {
   box-shadow: 0 0 24px rgba(49,245,208,0.3);
 }
 
+.brand-logo {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  display: block;
+}
+
 .nav-links {
   display: flex;
   flex-wrap: wrap;
