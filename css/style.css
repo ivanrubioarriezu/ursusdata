@@ -414,6 +414,10 @@ textarea {
   transform: translateY(0);
 }
 
+button.btn {
+  cursor: pointer;
+}
+
 
 @media (max-width: 900px) {
   .hero, .split, .contact-grid {
