@@ -8,6 +8,43 @@
     <meta name="description" content="Get in touch with UrsusData for a new website, product launch, or digital refresh." />
     <link rel="stylesheet" href="../css/style.css" />
   </head>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <script>
+  emailjs.init({
+      publicKey: "SJugVNZyB3hnrCiRs",
+  });
+
+  document.getElementById("contactForm").addEventListener("submit", function(event) {
+
+      event.preventDefault();
+
+      emailjs.send(
+          "Test1234",
+          "Template1234",
+          {
+              name: document.getElementById("name").value,
+              email: document.getElementById("email").value,
+              message: document.getElementById("message").value
+          }
+      )
+      .then(function() {
+
+          alert("Message sent successfully!");
+
+          document.getElementById("contactForm").reset();
+
+      })
+      .catch(function(error) {
+
+          alert("Failed to send message.");
+
+          console.error(error);
+
+      });
+
+  });
+  </script>
   <body>
     <canvas id="particles"></canvas>
 
@@ -45,7 +82,7 @@
         </div>
 
         <div class="block fade-up">
-          <form>
+          <form id="contactForm">
             <div class="form-group">
               <label for="name">Name</label>
               <input id="name" type="text" placeholder="Your name" />
@@ -58,7 +95,7 @@
               <label for="message">Project brief</label>
               <textarea id="message" placeholder="Tell us what you're building..."></textarea>
             </div>
-            <a class="btn btn-primary" href="mailto:ivanrubioar@gmail.com">Send email</a>
+            <button type="submit" class="btn btn-primary">Send email</button>
           </form>
         </div>
       </section>
