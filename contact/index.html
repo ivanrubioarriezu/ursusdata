@@ -90,9 +90,10 @@
             document.getElementById("contactForm").reset();
 
         })
-        .catch(func
-        
-        
+        .catch(function(error) {
+
+            alert("Failed to send the message. Please try again.");
+
             console.error(error);
 
         });
